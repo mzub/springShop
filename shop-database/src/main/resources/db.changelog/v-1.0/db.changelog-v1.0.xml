@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+    
+    <changeSet id="1" author="mzub">
+        <sqlFile path="01_create-user-and-role-tables.sql"
+                 dbms="mysql"
+                 encoding="utf8"
+                 endDelimiter="\nGO"
+                 relativeToChangelogFile="true"
+                 splitStatements="true"
+                 stripComments="true"
+        />
+        <rollback>
+            <sqlFile path="01_drop-user-and-role-tables.sql"
+                     dbms="mysql"
+                     encoding="utf8"
+                     endDelimiter="\nGO"
+                     relativeToChangelogFile="true"
+                     splitStatements="true"
+                     stripComments="true"
+            />
+        </rollback>
+    </changeSet>
+
+    <changeSet id="2" author="mzub">
+        <sqlFile path="01_insert-default-user.sql"
+                 dbms="mysql"
+                 encoding="utf8"
+                 endDelimiter="\nGO"
+                 relativeToChangelogFile="true"
+                 splitStatements="true"
+                 stripComments="true"
+        />
+        <rollback/>
+    </changeSet>
+
+    <changeSet id="3" author="mzub">
+        <sqlFile path="02_create-product-and-category-tables.sql"
+                 dbms="mysql"
+                 encoding="utf8"
+                 endDelimiter="\nGO"
+                 relativeToChangelogFile="true"
+                 splitStatements="true"
+                 stripComments="true"
+        />
+        <rollback>
+            <sqlFile path="02_drop-product-and-category-tables.sql"
+                     dbms="mysql"
+                     encoding="utf8"
+                     endDelimiter="\nGO"
+                     relativeToChangelogFile="true"
+                     splitStatements="true"
+                     stripComments="true"
+            />
+        </rollback>
+    </changeSet>
+
+
+
+</databaseChangeLog>
