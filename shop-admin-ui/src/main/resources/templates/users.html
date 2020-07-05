@@ -1,10 +1,54 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<header th:replace="fragments/header::header"></header>
+<body class="bg-light">
+<div th:replace="fragments/navbar::navbar"></div>
+<div class="d-flex">
+    <div th:replace="fragments/sidebar::sidebar"></div>
+    <div class="content p-4">
+        <h2 class="mb-4">USERS</h2>
+        <a type="button" th:href="@{/users/new}" class="btn btn-primary btn-lg btn-pill mb-2">Add user</a>
+        <div class="card mb-4">
+            <div class="card-body">
+                <table id="example" class="table table-hover" cellspacing="0" width="100%">
+                    <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>First name</th>
+                        <th>Last name</th>
+                        <th>Email</th>
+                        <th>Age</th>
+                        <th>Admin</th>
+                        <th class="actions">Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="user : ${users}">
+                        <td th:text="${user.userName}">username</td>
+                        <td th:text="${user.firstName}">firstname</td>
+                        <td th:text="${user.lastName}">lastname</td>
+                        <td th:text="${user.email}">email</td>
+                        <td th:text="${user.age}">age</td>
+                        <td><i id="adminMarker" th:if="${user.hasAdminRole()}" class="fas fa-check-square fa-lg"></i></td>
+                        <td>
+                            <a th:href="@{/users/edit(id=${user.id})}" class="btn btn-icon btn-pill btn-primary"
+                               data-toggle="tooltip" title="Edit"><i
+                                    class="fa fa-fw fa-edit"></i></a>
+                            <form class="editButtonForm" th:action="@{/users(id=${user.id})}" th:method="delete">
+                                <button type="submit" class="btn btn-icon btn-pill btn-danger" data-toggle="tooltip"
+                                        title="Delete"><i
+                                        class="fa fa-fw fa-trash"></i></button>
+                            </form>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
 
+
+<div th:replace="fragments/scripts::scripts"></div>
 </body>
 </html>

@@ -1,7 +1,7 @@
 package ru.geekbrains.model;
 
 import javax.persistence.*;
-import java.util.Collection;
+import java.util.Set;
 
 @Entity
 @Table(name="users")
@@ -29,21 +29,29 @@ public class User {
     private Integer age;
 
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name="users_roles", joinColumns = @JoinColumn(name="user_id"), inverseJoinColumns = @JoinColumn(name="role_id"))
-    private Collection<Role> roles;
+    private Set<Role> roles;
 
     public User() {
     }
 
-    public User(String userName, String password, String firstName, String lastName, String email, Integer age, Collection<Role> roles) {
+    public User(String userName, String password, String firstName, String lastName, String email, Integer age) {
         this.userName = userName;
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.age = age;
-        this.roles = roles;
+
+    }
+
+    public boolean hasAdminRole() {
+        if (!roles.isEmpty() && roles.stream().anyMatch(role -> role.getName().equals("ROLE_ADMIN"))) {
+            return true;
+        };
+
+        return false;
     }
 
     public Long getId() {
@@ -70,11 +78,11 @@ public class User {
         this.password = password;
     }
 
-    public Collection<Role> getRoles() {
+    public Set<Role> getRoles() {
         return roles;
     }
 
-    public void setRoles(Collection<Role> roles) {
+    public void setRoles(Set<Role> roles) {
         this.roles = roles;
     }
 

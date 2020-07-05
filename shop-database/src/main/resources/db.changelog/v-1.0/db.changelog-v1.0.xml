@@ -39,7 +39,7 @@
     </changeSet>
 
     <changeSet id="3" author="mzub">
-        <sqlFile path="02_create-product-and-category-tables.sql"
+        <sqlFile path="02_create-product-and-category-tables.sql.bak"
                  dbms="mysql"
                  encoding="utf8"
                  endDelimiter="\nGO"

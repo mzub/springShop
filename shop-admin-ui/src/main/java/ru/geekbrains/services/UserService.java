@@ -11,8 +11,11 @@ import org.springframework.transaction.annotation.Transactional;
 import ru.geekbrains.model.Role;
 import ru.geekbrains.model.User;
 import ru.geekbrains.repo.UserRepository;
+import ru.geekbrains.util.NotfoundException;
 
 import java.util.Collection;
+import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -27,6 +30,24 @@ public class UserService implements UserDetailsService {
 
     public User findUserByName(String userName) {
         return userRepository.findByUserName(userName);
+    }
+
+    public List<User> findAll() {
+        return userRepository.findAll();
+    }
+
+    public void save(User user) {
+        userRepository.save(user);
+    }
+
+    public void deleteUser(Long id) {
+        userRepository.delete(findById(id).orElseThrow((NotfoundException::new)));
+    }
+
+    @Transactional
+    public Optional<User> findById(long id) {
+        User usr = userRepository.findById(id).get();
+        return userRepository.findById(id);
     }
 
     @Override

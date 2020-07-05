@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<header th:replace="fragments/header::header"></header>
+<body class="bg-light">
+<div th:replace="fragments/navbar::navbar"></div>
+<div class="d-flex">
+    <div th:replace="fragments/sidebar::sidebar"></div>
+    <div class="content p-4">
+        <h2 class="mb-4">User profile</h2>
+        <div class="card mb-4">
+            <div class="card-body">
+                <form th:action="@{/users}" th:object="${user}" method="post">
+                    <div class="form-group">
+                        <input type="hidden" th:field="*{id}">
+                        <label for="userName">User name</label>
+                        <input type="text" th:field="*{userName}" class="form-control" id="userName"
+                               placeholder="Enter username">
+                    </div>
+                    <div class="form-group">
+                        <label for="inputPassword">Password</label>
+                        <input type="password" th:field="*{password}" class="form-control" id="inputPassword"
+                               placeholder="Password">
+                    </div>
+                    <div class="form-group">
+                        <label for="inputFirstName">First name</label>
+                        <input type="text" th:field="*{firstName}" class="form-control" id="inputFirstName"
+                               placeholder="Enter first name">
+                    </div>
+                    <div class="form-group">
+                        <label for="inputLastName">Last name</label>
+                        <input type="text" th:field="*{lastName}" class="form-control" id="inputLastName"
+                               placeholder="Enter last name">
+                    </div>
+                    <div class="form-group">
+                        <label for="inputEmail">Email address</label>
+                        <input type="email" th:field="*{email}" class="form-control" id="inputEmail"
+                               aria-describedby="emailHelp" placeholder="Enter email">
+                        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone
+                            else.</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputAge">Age</label>
+                        <input type="number" th:field="*{age}" class="form-control" id="inputAge"
+                               placeholder="Enter age">
+                    </div>
+                    <div th:each="role : ${roles}" class="form-group">
+                        <input type="checkbox" th:field="*{roles}" th:value="${role.id}"/>
+                        <label th:text="${role.name}"></label>
+                    </div>
+                    <div class="card-footer bg-white">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div th:replace="fragments/scripts::scripts"></div>
+</body>
+</html>
