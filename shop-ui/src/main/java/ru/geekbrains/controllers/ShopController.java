@@ -4,12 +4,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import ru.geekbrains.service.CategoryService;
 
 
 @Controller
-public class MainController {
+public class ShopController {
 
     private CategoryService categoryService;
 
@@ -18,9 +18,11 @@ public class MainController {
         this.categoryService = categoryService;
     }
 
-    @GetMapping("/")
-    public String mainPage(Model model) {
+    @GetMapping("/shop/{categoryId}")
+    public String shopPage(Model model, @PathVariable Long categoryId) {
         model.addAttribute("categories", categoryService.findAll());
-        return "index";
+        model.addAttribute("categoryToDisplay", categoryService.findById(categoryId));
+        return "shop";
     }
+
 }

@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import ru.geekbrains.model.Role;
 import ru.geekbrains.model.User;
 import ru.geekbrains.repo.UserRepository;
-import ru.geekbrains.util.NotfoundException;
+import ru.geekbrains.util.NotFoundException;
 
 import java.util.Collection;
 import java.util.List;
@@ -41,7 +41,7 @@ public class UserService implements UserDetailsService {
     }
 
     public void deleteUser(Long id) {
-        userRepository.delete(findById(id).orElseThrow((NotfoundException::new)));
+        userRepository.delete(findById(id).orElseThrow((NotFoundException::new)));
     }
 
     @Transactional

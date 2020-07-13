@@ -12,20 +12,22 @@
                 <table id="example" class="table table-hover" cellspacing="0" width="100%">
                     <thead>
                     <tr>
-                        <th>Id</th>
                         <th>Role title</th>
                         <th class="actions">Actions</th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr th:each="role : ${roles}">
-                        <td th:text="${role.id}">username</td>
                         <td th:text="${role.name}">firstname</td>
                         <td>
-                            <a href="#" class="btn btn-icon btn-pill btn-primary" data-toggle="tooltip" title="Edit"><i
+                            <a th:href="@{/roles/edit(id=${role.id})}" class="btn btn-icon btn-pill btn-primary"
+                               data-toggle="tooltip" title="Edit"><i
                                     class="fa fa-fw fa-edit"></i></a>
-                            <a href="#" class="btn btn-icon btn-pill btn-danger" data-toggle="tooltip" title="Delete"><i
-                                    class="fa fa-fw fa-trash"></i></a>
+                            <form class="deleteButtonForm" th:action="@{/roles(id=${role.id})}" th:method="delete">
+                                <button type="submit" class="btn btn-icon btn-pill btn-danger" data-toggle="tooltip"
+                                        title="Delete"><i
+                                        class="fa fa-fw fa-trash"></i></button>
+                            </form>
                         </td>
                     </tr>
                     </tbody>

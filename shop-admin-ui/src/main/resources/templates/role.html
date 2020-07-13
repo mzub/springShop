@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<header th:replace="fragments/header::header"></header>
+<body class="bg-light">
+<div th:replace="fragments/navbar::navbar"></div>
+<div class="d-flex">
+    <div th:replace="fragments/sidebar::sidebar"></div>
+    <div class="content p-4">
+        <h2 class="mb-4">Role</h2>
+        <div class="card mb-4">
+            <div class="card-body">
+                <form th:action="@{/roles}" th:object="${role}" method="post">
+                    <div class="form-group">
+                        <input type="hidden" th:field="*{id}">
+                        <label for="roleName">User name</label>
+                        <input type="text" th:field="*{name}" class="form-control" id="roleName"
+                               placeholder="Enter role name">
+                    <div class="card-footer bg-white">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div th:replace="fragments/scripts::scripts"></div>
+</body>
+</html>

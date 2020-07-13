@@ -10,7 +10,7 @@ import ru.geekbrains.services.UserService;
 
 @RequestMapping("/users")
 @Controller
-public class UsersController {
+public class UserController {
 
     private UserService userService;
     private RoleService roleService;

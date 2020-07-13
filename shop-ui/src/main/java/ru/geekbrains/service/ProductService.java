@@ -1,15 +1,18 @@
-package ru.geekbrains.services;
+package ru.geekbrains.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
+import ru.geekbrains.model.Category;
 import ru.geekbrains.model.Picture;
 import ru.geekbrains.model.PictureData;
 import ru.geekbrains.model.Product;
+import ru.geekbrains.repo.CategoryRepository;
 import ru.geekbrains.repo.ProductRepository;
 import ru.geekbrains.repr.ProductRepr;
 import ru.geekbrains.util.NotFoundException;
+
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -20,6 +23,12 @@ import java.util.stream.Collectors;
 public class ProductService {
 
     private ProductRepository productRepository;
+    private CategoryRepository categoryRepository;
+
+    @Autowired
+    public void setCategoryRepository(CategoryRepository categoryRepository) {
+        this.categoryRepository = categoryRepository;
+    }
 
     @Autowired
     public void setProductRepository(ProductRepository productRepository) {
@@ -36,6 +45,8 @@ public class ProductService {
         Product product = (productRepr.getId() != null) ? productRepository.findById(productRepr.getId())
                 .orElseThrow(NotFoundException::new) : new Product();
         product.setTitle(productRepr.getName());
+//        Category category = (productRepr.getCategoryRepr().getId() != null) ? categoryRepository.findById(productRepr.getCategoryRepr().getId())
+//                .orElseThrow(NotFoundException::new) : new Category();
         product.setCategory(productRepr.getCategory());
         product.setCost(productRepr.getPrice());
         if (productRepr.getNewPictures() != null) {

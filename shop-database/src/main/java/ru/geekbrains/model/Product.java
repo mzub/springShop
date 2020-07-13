@@ -2,6 +2,7 @@ package ru.geekbrains.model;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.List;
 
 @Entity
 @Table(name="products")
@@ -19,14 +20,14 @@ public class Product {
     @ManyToOne
     private Category category;
 
-    public Product() {
-    }
+    @OneToMany (
+            mappedBy = "product",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    private List<Picture> pictures;
 
-    public Product(Long id, String title, BigDecimal cost, Category category) {
-        this.id = id;
-        this.title = title;
-        this.cost = cost;
-        this.category = category;
+    public Product() {
     }
 
     public Long getId() {
@@ -59,5 +60,13 @@ public class Product {
 
     public void setCategory(Category category) {
         this.category = category;
+    }
+
+    public List<Picture> getPictures() {
+        return pictures;
+    }
+
+    public void setPictures(List<Picture> pictures) {
+        this.pictures = pictures;
     }
 }

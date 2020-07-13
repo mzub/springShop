@@ -1,24 +1,27 @@
 package ru.geekbrains.controllers;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import ru.geekbrains.services.ProductService;
+import org.springframework.web.bind.annotation.PathVariable;
+
+import ru.geekbrains.service.ProductService;
+
 
 @Controller
-public class ProductsController {
-    ProductService productService;
+public class ProductController {
+
+    private ProductService productService;
 
     @Autowired
     public void setProductService(ProductService productService) {
         this.productService = productService;
     }
 
-    @GetMapping("/products")
-    public String productsPage(Model model) {
-        model.addAttribute("products", productService.findAll());
-        return "products";
+    @GetMapping("/product/{id}")
+    public String product(Model model, @PathVariable Long id) {
+        model.addAttribute("product", productService.findById(id));
+        return "product-details";
     }
 }

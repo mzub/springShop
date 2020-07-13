@@ -1,12 +1,14 @@
-package ru.geekbrains.services;
+package ru.geekbrains.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.geekbrains.model.Category;
 import ru.geekbrains.repo.CategoryRepository;
+import ru.geekbrains.repr.CategoryRepr;
 import ru.geekbrains.util.NotFoundException;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class CategoryService {
@@ -18,19 +20,11 @@ public class CategoryService {
        this.categoryRepository = categoryRepository;
     }
 
-    public List<Category> findAll() {
-        return categoryRepository.findAll();
+    public List<CategoryRepr> findAll() {
+        return categoryRepository.findAll().stream().map(CategoryRepr::new).collect(Collectors.toList());
     }
 
-    public Category findById(Long id) {
-        return categoryRepository.findById(id).orElseThrow(NotFoundException::new);
-    }
-
-    public void save(Category category) {
-        categoryRepository.save(category);
-    }
-
-    public void deleteCategory(Long id) {
-        categoryRepository.delete(findById(id));
+    public CategoryRepr findById(Long id) {
+        return categoryRepository.findById(id).map(CategoryRepr::new).orElseThrow(NotFoundException::new);
     }
 }

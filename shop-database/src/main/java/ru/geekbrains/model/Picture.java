@@ -19,20 +19,21 @@ public class Picture implements Serializable {
     @Column(name = "content_type", nullable = false)
     private String contentType;
 
-    @OneToOne(fetch = FetchType.LAZY, cascade= CascadeType.ALL, optional = false, orphanRemoval = true)
-    @JoinColumn(name="picture_data_id")
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, optional = false, orphanRemoval = true)
+    @JoinColumn(name = "picture_data_id")
     private PictureData pictureData;
 
-    @ManyToMany(mappedBy = "pictures")
-    private List<Product> products;
+    @ManyToOne
+    private Product product;
 
     public Picture() {
     }
 
-    public Picture(String name, String contentType, PictureData pictureData) {
+    public Picture(String name, String contentType, PictureData pictureData, Product product) {
         this.name = name;
         this.contentType = contentType;
         this.pictureData = pictureData;
+        this.product = product;
     }
 
     public Long getId() {
@@ -63,15 +64,16 @@ public class Picture implements Serializable {
         return pictureData;
     }
 
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
+
     public void setPictureData(PictureData pictureData) {
         this.pictureData = pictureData;
     }
-
-    public List<Product> getProducts() {
-        return products;
-    }
-
-    public void setProducts(List<Product> products) {
-        this.products = products;
-    }
 }
+
