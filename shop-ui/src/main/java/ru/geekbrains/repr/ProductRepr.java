@@ -18,8 +18,7 @@ public class ProductRepr implements Serializable {
 
     private BigDecimal price;
 
-    private Category category;
-
+    private String categoryName;
 
     private List<PictureRepr> pictures;
 
@@ -32,7 +31,7 @@ public class ProductRepr implements Serializable {
         this.id = product.getId();
         this.name = product.getTitle();
         this.price = product.getCost();
-        this.category = product.getCategory();
+        this.categoryName = product.getCategory().getName();
         this.pictures = product.getPictures().stream()
                 .map(picture -> new PictureRepr(picture))
                 .collect(Collectors.toList());
@@ -62,14 +61,13 @@ public class ProductRepr implements Serializable {
         this.price = price;
     }
 
-    public Category getCategory() {
-        return category;
+    public String getCategoryName() {
+        return categoryName;
     }
 
-    public void setCategory(Category category) {
-        this.category = category;
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
     }
-
 
     public List<PictureRepr> getPictures() {
         return pictures;

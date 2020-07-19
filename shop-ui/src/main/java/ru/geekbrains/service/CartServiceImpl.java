@@ -67,7 +67,7 @@ public class CartServiceImpl implements CartService {
 
     @Override
     public List<LineItem> getLineItems() {
-        lineItems.forEach(LineItem::setQty);
+        lineItems.forEach((lineItem, qty) -> lineItem.setQty(qty));
         return new ArrayList<>(lineItems.keySet());
     }
 
