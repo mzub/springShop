@@ -101,7 +101,7 @@
                                 <tbody>
                                     <tr th:each="lineItem : ${lineItems}">
                                         <td class="cart_product_img">
-                                            <a href="#"><img th:src="@{/picture/{pictureId}(picturedId=${lineItem.productRepr.pictures[0].id})}" alt="Product"></a>
+                                            <a href="#"><img th:src="@{/picture/{pictureId}(pictureId=${lineItem.productRepr.pictures[0].id})}" alt="Product"></a>
                                         </td>
                                         <td class="cart_product_desc">
                                             <h5 th:text="${lineItem.productRepr.name}"></h5>
@@ -168,6 +168,8 @@
         </div>
     </section>
     <!-- ##### Newsletter Area End ##### -->
+    <!-- Chat Area -->
+    <div th:include="/fragments/chat :: chat"></div>
 
     <!-- ##### Footer Area Start ##### -->
     <footer class="footer_area clearfix">

@@ -136,9 +136,17 @@
             </div>
         </footer>
         <!-- ##### Footer Area End ##### -->
+        <!-- Chat Area -->
+        <chatarea class="clearfix">
+            <div clas="container">
+                <div th:include="/fragments/chat :: chat"></div>
+            </div>
+        </chatarea>
 
         <!-- ##### jQuery (Necessary for All JavaScript Plugins) ##### -->
         <div th:replace="fragments/scripts::scripts"></div>
+    </div>
+</div>
 </body>
 
 </html>

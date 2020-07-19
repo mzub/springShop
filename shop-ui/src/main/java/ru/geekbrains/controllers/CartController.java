@@ -8,6 +8,8 @@ import ru.geekbrains.service.CartService;
 import ru.geekbrains.service.ProductService;
 import ru.geekbrains.service.model.LineItem;
 
+import java.math.BigDecimal;
+
 @RequestMapping("/cart")
 @Controller
 public class CartController {
