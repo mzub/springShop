@@ -10,7 +10,11 @@ public class PictureRepr implements Serializable {
 
     private String name;
 
+
     private String contentType;
+
+    public PictureRepr() {
+    }
 
     public PictureRepr(Picture picture) {
         this.id = picture.getId();

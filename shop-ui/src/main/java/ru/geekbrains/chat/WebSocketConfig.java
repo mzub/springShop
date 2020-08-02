@@ -34,16 +34,17 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
     }
 
     @Override
+    public void registerStompEndpoints(StompEndpointRegistry registry) {
+        registry.addEndpoint("/gs-guide-websocket")
+                .setHandshakeHandler(customHandShakeHandler())
+                .withSockJS()
+                .setClientLibraryUrl("/webjars/sockjs-client/0.0.2/sockjs.min.js");
+    }
+
+    @Override
     public void configureMessageBroker(MessageBrokerRegistry registry) {
         registry.setApplicationDestinationPrefixes("/chat_in");
         registry.enableSimpleBroker("/chat_out");
     }
 
-    @Override
-    public void registerStompEndpoints(StompEndpointRegistry registry) {
-        registry.addEndpoint("/gs-guide-websocket")
-                .setHandshakeHandler(customHandShakeHandler())
-                .withSockJS()
-                .setClientLibraryUrl("/webjars/sockjs-client/1.0.2/sockjs.min.js");
-    }
 }
