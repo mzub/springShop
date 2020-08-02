@@ -12,16 +12,37 @@
     </parent>
 
 
+
     <groupId>ru.geekbrains</groupId>
     <artifactId>SpringShop</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
+    <properties>
+        <spring-cloud.version>Hoxton.SR6</spring-cloud.version>
+    </properties>
+
     <modules>
         <module>shop-database</module>
         <module>shop-admin-ui</module>
         <module>shop-ui</module>
+        <module>picture-service</module>
+        <module>stock-service</module>
+        <module>shop-eureka</module>
+        <module>shop-zuul-service</module>
     </modules>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
 
 </project>
