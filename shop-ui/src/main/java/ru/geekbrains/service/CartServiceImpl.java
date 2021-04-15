@@ -74,9 +74,9 @@ public class CartServiceImpl implements CartService {
     @JsonIgnore
     @Override
     public BigDecimal getSubTotal() {
-        lineItems.forEach(LineItem::setQty);
+        lineItems.forEach((lineItem, qty) -> lineItem.setQty(qty));
         return lineItems.keySet().stream()
-                .map(LineItem::getTotal)
+                .map(lineItem -> lineItem.getTotal())
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
     }
 

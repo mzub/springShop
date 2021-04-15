@@ -41,7 +41,7 @@ public class ProductController {
     }
 
     @GetMapping("edit")
-    public String editUser (Model model, @RequestParam Long id) {
+    public String editProduct(Model model, @RequestParam Long id) {
         model.addAttribute("product", productService.findById(id));
         model.addAttribute("categories", categoryService.findAll());
         return "product";
